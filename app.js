@@ -1,7 +1,10 @@
 const express = require('express');
 const childProcess = require('child_process');
+const morgan = require('morgan');
 const app = express();
 const port = 3000;
+
+app.use(morgan(':remote-addr - :method :url :status :response-time ms'));
 
 app.get(`/api/process/:pname`, (req, res) => {
   const processName = req.params.pname;
@@ -21,5 +24,5 @@ app.get(`/api/process/:pname`, (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`Listening on port ${port}`)
 });
